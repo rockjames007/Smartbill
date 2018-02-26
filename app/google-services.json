@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "335993277037",
+    "firebase_url": "https://smartbill-b2d2b.firebaseio.com",
+    "project_id": "smartbill-b2d2b",
+    "storage_bucket": "smartbill-b2d2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335993277037:android:0bac549c44747bcd",
+        "android_client_info": {
+          "package_name": "com.example.dipuj.smartbill"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335993277037-0hj127bgadbffet36gqsrlucr4dkkmbf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1uWurE2rJ4XE3HlR5vubuLhpLvjPWNU4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
