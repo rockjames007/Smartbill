@@ -102,19 +102,10 @@ public class userActivity extends AppCompatActivity
         else if (id == R.id.nav_logout) {
 
            FirebaseAuth.getInstance().signOut();
-           FirebaseAuth.AuthStateListener authListener= new FirebaseAuth.AuthStateListener() {
-               @Override
-               public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                   FirebaseUser user = firebaseAuth.getCurrentUser();
-                   if (user == null) {
-                       // user auth state is changed - user is null
-                       // launch login activity
-                       Intent intent = new Intent(userActivity.this, MainActivity.class);
-                       startActivity(intent);
-                       finish();
-                   }
-               }
-           };
+            Intent intent = new Intent(userActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
