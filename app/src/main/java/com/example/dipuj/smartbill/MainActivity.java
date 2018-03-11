@@ -33,17 +33,17 @@ public class MainActivity extends AppCompatActivity {
             auth = FirebaseAuth.getInstance();
 
             if (auth.getCurrentUser() != null) {
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                startActivity(new Intent(MainActivity.this, userActivity.class));
                 finish();
             }
 
             // set the view now
             setContentView(R.layout.activity_main);
 
-            inputEmail = (EditText) findViewById(R.id.emailid);
-            inputPassword = (EditText) findViewById(R.id.passwd);
-            btnLogin = (Button) findViewById(R.id.login);
-            btnReset = (TextView) findViewById(R.id.fgpasswd);
+            inputEmail = findViewById(R.id.emailid);
+            inputPassword = findViewById(R.id.passwd);
+            btnLogin = findViewById(R.id.login);
+            btnReset = findViewById(R.id.fgpasswd);
 
             //Get Firebase auth instance
             auth = FirebaseAuth.getInstance();

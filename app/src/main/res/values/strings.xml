@@ -15,4 +15,11 @@
     <string name="submit">Submit</string>
     <string name="enter_the_email_id">Enter the email id</string>
     <string name="we_just_need_your_registered_email_id">we just need your registered email id</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment_one">Hello blank fragment one</string>
+    <string name="hello_blank_fragment_two">Hello blank fragment two</string>
+    <string name="this_is_home">this is Home</string>
+    <string name="home_page">Home page</string>
+    <string name="usage_page">Usage page</string>
 </resources>
