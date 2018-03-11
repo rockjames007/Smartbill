@@ -104,6 +104,7 @@ public class userActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment=new Fragment();
         Class fragmentClass = null;
+
         if (id == R.id.nav_home) {
             fragmentClass = FragmentOne.class;
         } else if (id == R.id.nav_usage) {
