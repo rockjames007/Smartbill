@@ -18,13 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.dipuj.smartbill.R;
-import com.example.dipuj.smartbill.fragment.FragmentTwo;
-import com.example.dipuj.smartbill.fragment.FragmentOne;
+import com.example.dipuj.smartbill.fragment.UsageFragment;
+import com.example.dipuj.smartbill.fragment.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class UserActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,FragmentOne.OnFragmentInteractionListener,
-        FragmentTwo.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        UsageFragment.OnFragmentInteractionListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,7 @@ public class UserActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             Fragment fragment = null;
             Class fragmentClass = null;
-            fragmentClass = FragmentOne.class;
+            fragmentClass = HomeFragment.class;
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
             } catch (Exception e) {
@@ -104,17 +104,17 @@ public class UserActivity extends AppCompatActivity
         Class fragmentClass = null;
 
         if (id == R.id.nav_home) {
-            fragmentClass = FragmentOne.class;
+            fragmentClass = HomeFragment.class;
         } else if (id == R.id.nav_usage) {
-            fragmentClass = FragmentTwo.class;
+            fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_limit) {
-            fragmentClass = FragmentTwo.class;
+            fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_alert) {
-            fragmentClass = FragmentTwo.class;
+            fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_help) {
-            fragmentClass = FragmentTwo.class;
+            fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_aboutus) {
-            fragmentClass = FragmentTwo.class;
+            fragmentClass = UsageFragment.class;
         }
         else if (id == R.id.nav_logout) {
              FirebaseAuth.getInstance().signOut();
