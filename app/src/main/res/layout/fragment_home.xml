@@ -1,0 +1,177 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.dipuj.smartbill.fragment.HomeFragment">
+
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_user_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/lbl_name"
+                style="@style/LableTextViewHomeFragment"
+                android:text="@string/lbl_name" />
+
+            <TextView
+                android:id="@+id/txt_name"
+                style="@style/ValueTextViewHomeFragment"
+                android:text="Name" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_below="@+id/linear_layout_name">
+
+            <TextView
+                android:id="@+id/lbl_email"
+                style="@style/LableTextViewHomeFragment"
+                android:text="@string/lbl_email" />
+
+            <TextView
+                android:id="@+id/txt_email"
+                style="@style/ValueTextViewHomeFragment"
+                android:text="Email" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_mobile_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_below="@+id/linear_layout_email">
+
+            <TextView
+                android:id="@+id/lbl_mobile_number"
+                style="@style/LableTextViewHomeFragment"
+                android:text="@string/lbl_mobile_number" />
+
+            <TextView
+                android:id="@+id/txt_mobile_number"
+                style="@style/ValueTextViewHomeFragment"
+                android:text="Mobile Number" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_below="@+id/linear_layout_mobile_number">
+
+            <TextView
+                android:id="@+id/lbl_address"
+                style="@style/LableTextViewHomeFragment"
+                android:text="@string/lbl_address" />
+
+            <TextView
+                android:id="@+id/txt_address"
+                style="@style/ValueTextViewHomeFragment"
+                android:text="Address"
+                android:lines="3"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_meter_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_below="@+id/linear_layout_address">
+
+            <TextView
+                android:id="@+id/lbl_meter_id"
+                style="@style/LableTextViewHomeFragment"
+                android:text="@string/lbl_meter_id" />
+
+            <TextView
+                android:id="@+id/txt_meter_id"
+                style="@style/ValueTextViewHomeFragment"
+                android:text="Meter ID" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_meter_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_below="@+id/relative_layout_user_detail">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/lbl_name"
+                style="@style/LableTextViewHomeFragment"
+                android:text="@string/lbl_name" />
+
+            <TextView
+                android:id="@+id/txt_name"
+                style="@style/ValueTextViewHomeFragment"
+                android:text="Name" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_below="@+id/linear_layout_name">
+
+            <TextView
+                android:id="@+id/lbl_email"
+                style="@style/LableTextViewHomeFragment"
+                android:text="@string/lbl_email" />
+
+            <TextView
+                android:id="@+id/txt_email"
+                style="@style/ValueTextViewHomeFragment"
+                android:text="Email" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_mobile_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_below="@+id/linear_layout_email">
+
+            <TextView
+                android:id="@+id/lbl_mobile_number"
+                style="@style/LableTextViewHomeFragment"
+                android:text="@string/lbl_mobile_number" />
+
+            <TextView
+                android:id="@+id/txt_mobile_number"
+                style="@style/ValueTextViewHomeFragment"
+                android:text="Mobile Number" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

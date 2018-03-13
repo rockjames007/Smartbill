@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ResetPasswordActivity" />
-
         <activity
             android:name=".activity.UserActivity"
             android:label="@string/title_activity_user"

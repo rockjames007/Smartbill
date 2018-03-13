@@ -28,9 +28,12 @@ public class UserActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_user);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         if (savedInstanceState == null) {
             Fragment fragment = null;
             Class fragmentClass = null;
@@ -44,6 +47,7 @@ public class UserActivity extends AppCompatActivity
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         }
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +104,7 @@ public class UserActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment=new Fragment();
+        Fragment fragment = new Fragment();
         Class fragmentClass = null;
 
         if (id == R.id.nav_home) {
@@ -115,11 +119,10 @@ public class UserActivity extends AppCompatActivity
             fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_aboutus) {
             fragmentClass = UsageFragment.class;
-        }
-        else if (id == R.id.nav_logout) {
-             FirebaseAuth.getInstance().signOut();
+        } else if (id == R.id.nav_logout) {
+            FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, LoginActivity.class);
-           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
 
