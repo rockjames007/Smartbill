@@ -1,13 +1,11 @@
-package com.example.dipuj.smartbill;
+package com.example.dipuj.smartbill.activity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,24 +17,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.dipuj.smartbill.R;
+import com.example.dipuj.smartbill.fragment.UsageFragment;
+import com.example.dipuj.smartbill.fragment.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class userActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,FragmentOne.OnFragmentInteractionListener,
-        FragmentTwo.OnFragmentInteractionListener {
+public class UserActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_user);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         if (savedInstanceState == null) {
             Fragment fragment = null;
             Class fragmentClass = null;
-            fragmentClass = FragmentOne.class;
+            fragmentClass = HomeFragment.class;
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
             } catch (Exception e) {
@@ -46,6 +46,7 @@ public class userActivity extends AppCompatActivity
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         }
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,26 +103,25 @@ public class userActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment=new Fragment();
+        Fragment fragment = new Fragment();
         Class fragmentClass = null;
 
         if (id == R.id.nav_home) {
-            fragmentClass = FragmentOne.class;
+            fragmentClass = HomeFragment.class;
         } else if (id == R.id.nav_usage) {
-            fragmentClass = FragmentTwo.class;
+            fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_limit) {
-            fragmentClass = FragmentTwo.class;
+            fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_alert) {
-            fragmentClass = FragmentTwo.class;
+            fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_help) {
-            fragmentClass = FragmentTwo.class;
+            fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_aboutus) {
-            fragmentClass = FragmentTwo.class;
-        }
-        else if (id == R.id.nav_logout) {
-             FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(this, MainActivity.class);
-           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            fragmentClass = UsageFragment.class;
+        } else if (id == R.id.nav_logout) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, LoginActivity.class);
+            // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
 
@@ -136,10 +136,5 @@ public class userActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }
