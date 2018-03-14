@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dipuj.smartbill.fragment.HomeFragment">
+    tools:context="com.example.dipuj.smartbill.fragment.HomeFragment"
+    android:padding="10dp">
 
 
     <RelativeLayout
         android:id="@+id/relative_layout_user_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp">
 
         <LinearLayout
@@ -19,12 +20,12 @@
 
             <TextView
                 android:id="@+id/lbl_name"
-                style="@style/LableTextViewHomeFragment"
+                style="@style/LabelTextHomeFragment"
                 android:text="@string/lbl_name" />
 
             <TextView
                 android:id="@+id/txt_name"
-                style="@style/ValueTextViewHomeFragment"
+                style="@style/UserValueTextViewHomeFragment"
                 android:text="Name" />
 
         </LinearLayout>
@@ -38,12 +39,12 @@
 
             <TextView
                 android:id="@+id/lbl_email"
-                style="@style/LableTextViewHomeFragment"
+                style="@style/LabelTextHomeFragment"
                 android:text="@string/lbl_email" />
 
             <TextView
                 android:id="@+id/txt_email"
-                style="@style/ValueTextViewHomeFragment"
+                style="@style/UserValueTextViewHomeFragment"
                 android:text="Email" />
 
         </LinearLayout>
@@ -57,12 +58,12 @@
 
             <TextView
                 android:id="@+id/lbl_mobile_number"
-                style="@style/LableTextViewHomeFragment"
+                style="@style/LabelTextHomeFragment"
                 android:text="@string/lbl_mobile_number" />
 
             <TextView
                 android:id="@+id/txt_mobile_number"
-                style="@style/ValueTextViewHomeFragment"
+                style="@style/UserValueTextViewHomeFragment"
                 android:text="Mobile Number" />
 
         </LinearLayout>
@@ -76,12 +77,12 @@
 
             <TextView
                 android:id="@+id/lbl_address"
-                style="@style/LableTextViewHomeFragment"
+                style="@style/LabelTextHomeFragment"
                 android:text="@string/lbl_address" />
 
             <TextView
                 android:id="@+id/txt_address"
-                style="@style/ValueTextViewHomeFragment"
+                style="@style/UserValueTextViewHomeFragment"
                 android:text="Address"
                 android:lines="3"/>
 
@@ -96,12 +97,12 @@
 
             <TextView
                 android:id="@+id/lbl_meter_id"
-                style="@style/LableTextViewHomeFragment"
+                style="@style/LabelTextHomeFragment"
                 android:text="@string/lbl_meter_id" />
 
             <TextView
                 android:id="@+id/txt_meter_id"
-                style="@style/ValueTextViewHomeFragment"
+                style="@style/UserValueTextViewHomeFragment"
                 android:text="Meter ID" />
 
         </LinearLayout>
@@ -111,63 +112,63 @@
     <RelativeLayout
         android:id="@+id/relative_layout_meter_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_below="@+id/relative_layout_user_detail">
 
         <LinearLayout
-            android:id="@+id/linear_layout_name"
+            android:id="@+id/linear_layout_last_bill_reading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/lbl_name"
-                style="@style/LableTextViewHomeFragment"
-                android:text="@string/lbl_name" />
+                android:id="@+id/lbl_last_bill_reading"
+                style="@style/LabelTextHomeFragment"
+                android:text="@string/lbl_last_bill_reading" />
 
             <TextView
-                android:id="@+id/txt_name"
-                style="@style/ValueTextViewHomeFragment"
-                android:text="Name" />
+                android:id="@+id/txt_last_bill_reading"
+                style="@style/MeterDetailValueViewHomeFragment"
+                android:text="Last Bill Reading" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linear_layout_email"
+            android:id="@+id/linear_layout_curennt_reading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_below="@+id/linear_layout_name">
+            android:layout_below="@+id/linear_layout_last_bill_reading">
 
             <TextView
-                android:id="@+id/lbl_email"
-                style="@style/LableTextViewHomeFragment"
-                android:text="@string/lbl_email" />
+                android:id="@+id/lbl_current_reading"
+                style="@style/LabelTextHomeFragment"
+                android:text="@string/lbl_current_reading" />
 
             <TextView
-                android:id="@+id/txt_email"
-                style="@style/ValueTextViewHomeFragment"
-                android:text="Email" />
+                android:id="@+id/txt_current_reading"
+                style="@style/MeterDetailValueViewHomeFragment"
+                android:text="Current Reading" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linear_layout_mobile_number"
+            android:id="@+id/linear_layout_consumption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:layout_below="@+id/linear_layout_email">
+            android:layout_below="@+id/linear_layout_curennt_reading">
 
             <TextView
-                android:id="@+id/lbl_mobile_number"
-                style="@style/LableTextViewHomeFragment"
-                android:text="@string/lbl_mobile_number" />
+                android:id="@+id/lbl_counsumption"
+                style="@style/LabelTextHomeFragment"
+                android:text="@string/lbl_consumption" />
 
             <TextView
-                android:id="@+id/txt_mobile_number"
-                style="@style/ValueTextViewHomeFragment"
-                android:text="Mobile Number" />
+                android:id="@+id/txt_consumption"
+                style="@style/MeterDetailValueViewHomeFragment"
+                android:text="Consumption" />
 
         </LinearLayout>
 

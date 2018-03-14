@@ -23,8 +23,7 @@ import com.example.dipuj.smartbill.fragment.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class UserActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        UsageFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,10 +136,5 @@ public class UserActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 }
