@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.dipuj.smartbill.R;
 import com.example.dipuj.smartbill.modal.User;
+import com.example.dipuj.smartbill.utility.Constant;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -21,9 +22,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class HomeFragment extends Fragment {
+public class UserDetailsFragment extends Fragment {
 
-    private final String TAG = "HomeFragment";
+    private final String TAG = "UserDetailsFragment";
     FirebaseFirestore dataBase;
     private User user;
     private TextView mTextViewName;
@@ -32,7 +33,7 @@ public class HomeFragment extends Fragment {
     private TextView mTextViewAddress;
     private TextView mTextViewMeterId;
 
-    public HomeFragment() {
+    public UserDetailsFragment() {
         // Required empty public constructor
 
     }
@@ -49,18 +50,18 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_details, container, false);
         initializeView(view);
         this.retrieveFireBaseData();
         return view;
     }
 
     private void initializeView(View view) {
-        mTextViewName = (TextView)view.findViewById(R.id.txt_name);
-        mTextViewEmail = (TextView)view.findViewById(R.id.txt_email);
-        mTextViewMobileNumber = (TextView)view.findViewById(R.id.txt_mobile_number);
-        mTextViewAddress = (TextView)view.findViewById(R.id.txt_address);
-        mTextViewMeterId = (TextView)view.findViewById(R.id.txt_meter_id);
+        mTextViewName = view.findViewById(R.id.txt_name);
+        mTextViewEmail = view.findViewById(R.id.txt_email);
+        mTextViewMobileNumber = view.findViewById(R.id.txt_mobile_number);
+        mTextViewAddress = view.findViewById(R.id.txt_address);
+        mTextViewMeterId = view.findViewById(R.id.txt_meter_id);
     }
 
     private void initializeFirebaseFirestore() {
@@ -80,11 +81,11 @@ public class HomeFragment extends Fragment {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot doc = task.getResult();
-                    user.setName(doc.getString("name"));
-                    user.setAddress(doc.getString("address"));
-                    user.setMobileNo(doc.getString("mobileno"));
-                    user.setEmail(doc.getString("email"));
-                    user.setMeterId(doc.getString("meterid"));
+                    user.setName(doc.getString(Constant.KEY_NAME));
+                    user.setAddress(doc.getString(Constant.KEY_ADDRESS));
+                    user.setMobileNo(doc.getString(Constant.KEY_MOBILE_NO));
+                    user.setEmail(doc.getString(Constant.KEY_EMAIL));
+                    user.setMeterId(doc.getString(Constant.KEY_METER_ID));
                     Log.d(TAG, "Fetched Data : " + user.toString());
 
                     updateView(user);

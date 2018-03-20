@@ -1,7 +1,6 @@
 package com.example.dipuj.smartbill.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,7 +19,7 @@ import android.view.MenuItem;
 
 import com.example.dipuj.smartbill.R;
 import com.example.dipuj.smartbill.fragment.UsageFragment;
-import com.example.dipuj.smartbill.fragment.HomeFragment;
+import com.example.dipuj.smartbill.fragment.UserDetailsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class UserActivity extends AppCompatActivity
@@ -47,7 +46,7 @@ public class UserActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             Fragment fragment = null;
             Class fragmentClass = null;
-            fragmentClass = HomeFragment.class;
+            fragmentClass = UserDetailsFragment.class;
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
             } catch (Exception e) {
@@ -118,7 +117,7 @@ public class UserActivity extends AppCompatActivity
         Class fragmentClass = null;
 
         if (id == R.id.nav_home) {
-            fragmentClass = HomeFragment.class;
+            fragmentClass = UserDetailsFragment.class;
         } else if (id == R.id.nav_usage) {
             fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_limit) {
