@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.dipuj.smartbill.R;
 import com.example.dipuj.smartbill.modal.User;
 import com.example.dipuj.smartbill.utility.Constant;
+import com.example.dipuj.smartbill.utility.Pref;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +33,8 @@ public class UserDetailsFragment extends Fragment {
     private TextView mTextViewMobileNumber;
     private TextView mTextViewAddress;
     private TextView mTextViewMeterId;
+
+    private Context context;
 
     public UserDetailsFragment() {
         // Required empty public constructor
@@ -67,10 +70,8 @@ public class UserDetailsFragment extends Fragment {
     private void initializeFirebaseFirestore() {
 
         dataBase = FirebaseFirestore.getInstance();
-
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         user = new User();
-        user.setUserId(currentFirebaseUser.getUid());
+        user.setUserId(Pref.getValue(context,Constant.KEY_USER_ID,"",Constant.PREF_NAME));
     }
 
     private void retrieveFireBaseData() {
@@ -86,6 +87,7 @@ public class UserDetailsFragment extends Fragment {
                     user.setMobileNo(doc.getString(Constant.KEY_MOBILE_NO));
                     user.setEmail(doc.getString(Constant.KEY_EMAIL));
                     user.setMeterId(doc.getString(Constant.KEY_METER_ID));
+                    Pref.setValue(context, Constant.KEY_METER_ID,user.getMeterId(),Constant.PREF_NAME);
                     Log.d(TAG, "Fetched Data : " + user.toString());
 
                     updateView(user);
@@ -111,6 +113,7 @@ public class UserDetailsFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
     }
 
     @Override

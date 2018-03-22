@@ -5,19 +5,19 @@ import java.util.Date;
 
 public class Reading {
 
-    private double reading;
-    private Timestamp timestamp;
+    private Object reading;
+    private Object timestamp;
 
     public Reading(){
 
     }
 
-    public Reading(double reading, Timestamp timestamp) {
+    public Reading(Object reading, Object timestamp) {
         this.reading = reading;
         this.timestamp = timestamp;
     }
 
-    public double getReading() {
+    public Object getReading() {
         return reading;
     }
 
@@ -25,7 +25,7 @@ public class Reading {
         this.reading = reading;
     }
 
-    public Timestamp getTimestamp() {
+    public Object getTimestamp() {
         return timestamp;
     }
 

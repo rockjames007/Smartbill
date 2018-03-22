@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,15 +17,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.dipuj.smartbill.R;
+import com.example.dipuj.smartbill.fragment.AlertFragment;
+import com.example.dipuj.smartbill.fragment.LimitFragment;
 import com.example.dipuj.smartbill.fragment.UsageFragment;
 import com.example.dipuj.smartbill.fragment.UserDetailsFragment;
+import com.example.dipuj.smartbill.modal.User;
+import com.example.dipuj.smartbill.utility.Constant;
+import com.example.dipuj.smartbill.utility.Pref;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class UserActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     private final String TAG = "UserActivity";
-    private FirebaseAuth auth;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +39,10 @@ public class UserActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_user);
 
-        auth = FirebaseAuth.getInstance();
-
-        if (auth.getCurrentUser() != null) {
-            Log.d(TAG,auth.getCurrentUser().toString());
-        }
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        user = new User();
+        user.setUserId(currentFirebaseUser.getUid());
+        Pref.setValue(getApplicationContext(), Constant.KEY_USER_ID,user.getUserId(),Constant.PREF_NAME);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -121,9 +125,9 @@ public class UserActivity extends AppCompatActivity
         } else if (id == R.id.nav_usage) {
             fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_limit) {
-            fragmentClass = UsageFragment.class;
+            fragmentClass = LimitFragment.class;
         } else if (id == R.id.nav_alert) {
-            fragmentClass = UsageFragment.class;
+            fragmentClass = AlertFragment.class;
         } else if (id == R.id.nav_help) {
             fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_aboutus) {
