@@ -1,8 +1,10 @@
 package com.example.dipuj.smartbill.fragment;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 public class UsageFragment extends Fragment {
 
@@ -45,15 +48,15 @@ public class UsageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeFirebaseFirestore();
-
-        retrieveFireBaseData(getPath());
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_usage, container, false);
+        retrieveFireBaseData(getPath());
         initializeSpinner(view);
 
         Log.i(TAG, "Feched Data : " + reading.toString());
@@ -66,10 +69,10 @@ public class UsageFragment extends Fragment {
         for (int i = 2015; i <= thisYear; i++) {
             years.add(Integer.toString(i));
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, years);
 
-        mSpinnerYear = (Spinner) view.findViewById(R.id.spinner_year);
+        mSpinnerYear = view.findViewById(R.id.spinner_year);
         mSpinnerYear.setAdapter(adapter);
         mSpinnerYear.setSelection(years.size() - 1);
     }
@@ -79,8 +82,8 @@ public class UsageFragment extends Fragment {
         dataBase = FirebaseFirestore.getInstance();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void retrieveFireBaseData(final String path) {
-
         for (final String month : Constant.months) {
             DocumentReference documentReference = dataBase
                     .collection(path)
@@ -115,10 +118,15 @@ public class UsageFragment extends Fragment {
                                                             if (innerTask.isSuccessful()) {
                                                                 DocumentSnapshot innerDoc = innerTask.getResult();
                                                                 if (innerDoc.exists()) {
-                                                                    Reading reading = new Reading(
+                                                                    Reading innerreading = new Reading(
                                                                             innerDoc.get(Constant.KEY_READING),
                                                                             innerDoc.get(Constant.KEY_TIME_STUMP));
-                                                                    weekData.add(reading);
+                                                                    weekData.add(innerreading);
+                                                                }
+                                                                if(Objects.equals(month, "march") && finalI == 7){
+                                                                    Log.e(TAG,"DATA : " + reading.toString()+" "+reading.size());
+                                                                }else {
+                                                                    Log.e(TAG,month);
                                                                 }
                                                             }
                                                         }
@@ -140,8 +148,8 @@ public class UsageFragment extends Fragment {
 
                 }
             });
+            reading.add(monthData);
         }
-        reading.add(monthData);
     }
 
     private String getPath() {
