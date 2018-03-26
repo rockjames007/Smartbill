@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
@@ -28,12 +29,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class UsageFragment extends Fragment {
@@ -51,10 +50,6 @@ public class UsageFragment extends Fragment {
     private ReadingExpandableListAdapter mReadingExpandableListAdapter;
     private ArrayList<String> headerList;
     private HashMap<String, ArrayList<Reading>> childList;
-
-    //ArrayList<ArrayList<List<Reading>>> reading = new ArrayList<>();
-    //ArrayList<List<Reading>> monthData = null;
-    //List<Reading> weekData = null;
 
     int index = 0;
 
@@ -94,7 +89,8 @@ public class UsageFragment extends Fragment {
 
         for (int i=0; i<reading.size(); i++)
         {
-            if(mSpinnerMonth.getSelectedItemId() == i){
+            if(index == i){
+                Log.e(TAG, "Index taken : " + index);
                 Map<String,Object> map;
                 map = reading.get(i);
                 headerList = new ArrayList<>(map.keySet());
@@ -107,8 +103,9 @@ public class UsageFragment extends Fragment {
                         for(Object ob:readingObList){
                             Reading reading=new Reading();
                             HashMap<String,Object>  hashMap=(HashMap<String,Object>) ob;
-                            reading.setReading((Long) hashMap.get("reading"));
-                            reading.setTimestamp((Date) hashMap.get("timestump"));
+                            reading.setReading((Long) hashMap.get(Constant.KEY_READING));
+                            reading.setTimestamp((Date) hashMap.get(Constant.KEY_TIME_STUMP));
+                            Log.e(TAG,"date : " + reading.getTimestamp().toString());
                             readingList.add(reading);
                         }
                         childList.put(headerList.get(j), readingList);
@@ -120,6 +117,7 @@ public class UsageFragment extends Fragment {
                 context,headerList,childList);
 
         mExpandableListViewReading.setAdapter(mReadingExpandableListAdapter);
+        mReadingExpandableListAdapter.notifyDataSetChanged();
 
     }
 
@@ -152,6 +150,25 @@ public class UsageFragment extends Fragment {
         mSpinnerMonth = view.findViewById(R.id.spinner_month);
         mSpinnerMonth.setAdapter(adapter);
         mSpinnerMonth.setSelection(0);
+
+        mSpinnerMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                if(position != 0)
+                {
+                    index = position;
+                    loadData();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0)
+            {
+                //nothing to do.
+            }
+        });
     }
 
     private void initializeFirebaseFirestore() {
@@ -161,6 +178,9 @@ public class UsageFragment extends Fragment {
 
     private void retrieveFireStoreData(final String path){
 
+        Log.e(TAG,"index : " + index);
+
+        mProgressBar.bringToFront();
         mProgressBar.setVisibility(View.VISIBLE);
 
         DocumentReference documentReference = dataBase
@@ -186,6 +206,7 @@ public class UsageFragment extends Fragment {
                         if(index < 12){
                             retrieveFireStoreData(path);
                         }else{
+                            index = 0;
                             loadData();
                             mProgressBar.setVisibility(View.INVISIBLE);
                             Log.e(TAG,reading.toString());

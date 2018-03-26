@@ -10,7 +10,7 @@ public class Constant {
     public static final String KEY_MOBILE_NO = "mobileno";
     public static  final  String KEY_UPDATED = "updated";
 
-    public static final String KEY_TIME_STUMP = "timestamp";
+    public static final String KEY_TIME_STUMP = "timestump";
     public static final String KEY_READING = "reading";
 
     public static final String PREF_NAME = "SmartbillPreference";
@@ -37,4 +37,6 @@ public class Constant {
             "week4",
             "week5",
     };
+
+
 }
