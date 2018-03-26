@@ -1,35 +1,34 @@
 package com.example.dipuj.smartbill.modal;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class Reading {
 
-    private Object reading;
-    private Object timestamp;
+    private Long reading;
+    private Date timestamp;
 
     public Reading(){
 
     }
 
-    public Reading(Object reading, Object timestamp) {
+    public Reading(Long reading, Date timestamp) {
         this.reading = reading;
         this.timestamp = timestamp;
     }
 
-    public Object getReading() {
+    public Long getReading() {
         return reading;
     }
 
-    public void setReading(double reading) {
+    public void setReading(Long reading) {
         this.reading = reading;
     }
 
-    public Object getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 }

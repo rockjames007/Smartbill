@@ -21,8 +21,11 @@
     <string name="lbl_mobile_number">Mobile Number</string>
     <string name="lbl_address">Address</string>
     <string name="lbl_meter_id">Meter Id</string>
-    
+
     <string name="lbl_last_bill_reading">Last bill reading</string>
     <string name="lbl_current_reading">Current reading</string>
     <string name="lbl_consumption">Consumption</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
