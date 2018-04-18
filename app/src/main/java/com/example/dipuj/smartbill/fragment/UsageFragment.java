@@ -5,7 +5,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,7 @@ public class UsageFragment extends Fragment {
     private Spinner mSpinnerYear;
     private Spinner mSpinnerMonth;
     private ProgressBar mProgressBar;
+    private FloatingActionButton mFloatingActionButton;
 
     private ArrayList<Map<String,Object>> reading = new ArrayList<>();
 
@@ -72,6 +75,7 @@ public class UsageFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_usage, container, false);
         initializeProgressBar(view);
+        initializeFloatingActionButton(view);
         initializeYearSpinner(view);
         initializeMonthSpinner(view);
         initializeExpandableListView(view);
@@ -119,6 +123,17 @@ public class UsageFragment extends Fragment {
         mExpandableListViewReading.setAdapter(mReadingExpandableListAdapter);
         mReadingExpandableListAdapter.notifyDataSetChanged();
 
+    }
+
+    private void initializeFloatingActionButton(View view){
+        mFloatingActionButton = view.findViewById(R.id.fab_chart);
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.flContent, new GraphFragment()).commit();
+            }
+        });
     }
 
     private void initializeProgressBar(View view){
@@ -244,74 +259,4 @@ public class UsageFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
-
-    /*@RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void retrieveFireBaseData(final String path) {
-        for (final String month : Constant.months) {
-            DocumentReference documentReference = dataBase
-                    .collection(path)
-                    .document(month);
-            documentReference.get().addOnCompleteListener(
-                    new OnCompleteListener<DocumentSnapshot>() {
-
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot doc = task.getResult();
-                                if (doc.exists()) {
-                                    monthData = new ArrayList<>();
-                                    for (String week : Constant.weeks) {
-                                        weekData = new ArrayList<>();
-                                        for (int i = 1; i <= 7; i++) {
-                                            DocumentReference innerDocumentReference =
-                                                    dataBase
-                                                    .collection(path)
-                                                    .document(month)
-                                                    .collection(week)
-                                                    .document(i + "");
-
-                                            final int finalI = i;
-                                            innerDocumentReference.get().
-                                                    addOnCompleteListener(
-                                                    new OnCompleteListener<DocumentSnapshot>()
-                                                    {
-
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<DocumentSnapshot> innerTask) {
-                                                            if (innerTask.isSuccessful()) {
-                                                                DocumentSnapshot innerDoc = innerTask.getResult();
-                                                                if (innerDoc.exists()) {
-                                                                    Reading innerreading = new Reading(
-                                                                            innerDoc.get(Constant.KEY_READING),
-                                                                            innerDoc.get(Constant.KEY_TIME_STUMP));
-                                                                    weekData.add(innerreading);
-                                                                }
-                                                                if(Objects.equals(month, "march") && finalI == 7){
-                                                                    Log.e(TAG,"DATA : " + reading.toString()+" "+reading.size());
-                                                                }else {
-                                                                    Log.e(TAG,month);
-                                                                }
-                                                            }
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-
-                                                }
-                                            });
-                                        }
-                                    }
-                                    monthData.add(weekData);
-                                }
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-
-                }
-            });
-            reading.add(monthData);
-        }
-    }*/
 }
