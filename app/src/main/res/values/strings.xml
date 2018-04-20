@@ -26,6 +26,8 @@
     <string name="lbl_current_reading">Current reading</string>
     <string name="lbl_consumption">Consumption</string>
 
+    <string name="lbl_fetching_details">Fetching details…</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

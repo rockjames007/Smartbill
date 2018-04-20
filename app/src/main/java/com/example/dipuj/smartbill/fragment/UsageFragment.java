@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 
 import com.example.dipuj.smartbill.R;
+import com.example.dipuj.smartbill.activity.UserActivity;
 import com.example.dipuj.smartbill.adapter.ReadingExpandableListAdapter;
 import com.example.dipuj.smartbill.modal.Reading;
 import com.example.dipuj.smartbill.utility.Constant;
@@ -40,19 +41,15 @@ import java.util.Map;
 public class UsageFragment extends Fragment {
 
     private final String TAG = "UsageFragment";
-    private FirebaseFirestore dataBase;
 
-    private Spinner mSpinnerYear;
     private Spinner mSpinnerMonth;
-    private ProgressBar mProgressBar;
     private FloatingActionButton mFloatingActionButton;
-
-    private ArrayList<Map<String,Object>> reading = new ArrayList<>();
 
     private ExpandableListView mExpandableListViewReading;
     private ReadingExpandableListAdapter mReadingExpandableListAdapter;
     private ArrayList<String> headerList;
     private HashMap<String, ArrayList<Reading>> childList;
+    private ArrayList<Map<String, Object>> reading = new ArrayList<>();
 
     int index = 0;
 
@@ -65,7 +62,6 @@ public class UsageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeFirebaseFirestore();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -74,12 +70,15 @@ public class UsageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_usage, container, false);
-        initializeProgressBar(view);
         initializeFloatingActionButton(view);
-        initializeYearSpinner(view);
         initializeMonthSpinner(view);
         initializeExpandableListView(view);
-        retrieveFireStoreData(getPath());
+
+        headerList = ((UserActivity) getActivity()).getHeaderList();
+        childList = ((UserActivity) getActivity()).getChildList();
+        reading = ((UserActivity) getActivity()).getReading();
+
+        loadData();
 
         //Log.i(TAG, "Fetched Data : " + reading.toString());
         return view;
@@ -91,29 +90,28 @@ public class UsageFragment extends Fragment {
 
     private void loadData(){
 
-        for (int i=0; i<reading.size(); i++)
-        {
-            if(index == i){
+        for (int i = 0; i < reading.size(); i++) {
+            if (index == i) {
                 Log.e(TAG, "Index taken : " + index);
-                Map<String,Object> map;
+                Map<String, Object> map;
                 map = reading.get(i);
                 headerList = new ArrayList<>(map.keySet());
                 childList = new HashMap<>();
                 Object[] arr = map.values().toArray();
                 ArrayList<Object> readingObList;
-                for(int j=0; j<headerList.size(); j++){
-                    readingObList=(ArrayList<Object>)arr[j];
-                    ArrayList<Reading> readingList=new ArrayList<>();
-                        for(Object ob:readingObList){
-                            Reading reading=new Reading();
-                            HashMap<String,Object>  hashMap=(HashMap<String,Object>) ob;
-                            reading.setReading((Long) hashMap.get(Constant.KEY_READING));
-                            reading.setTimestamp((Date) hashMap.get(Constant.KEY_TIME_STUMP));
-                            Log.e(TAG,"date : " + reading.getTimestamp().toString());
-                            readingList.add(reading);
-                        }
-                        childList.put(headerList.get(j), readingList);
-                 }
+                for (int j = 0; j < headerList.size(); j++) {
+                    readingObList = (ArrayList<Object>) arr[j];
+                    ArrayList<Reading> readingList = new ArrayList<>();
+                    for (Object ob : readingObList) {
+                        Reading reading = new Reading();
+                        HashMap<String, Object> hashMap = (HashMap<String, Object>) ob;
+                        reading.setReading((Long) hashMap.get(Constant.KEY_READING));
+                        reading.setTimestamp((Date) hashMap.get(Constant.KEY_TIME_STUMP));
+                        Log.e(TAG, "date : " + reading.getTimestamp().toString());
+                        readingList.add(reading);
+                    }
+                    childList.put(headerList.get(j), readingList);
+                }
             }
         }
 
@@ -136,28 +134,7 @@ public class UsageFragment extends Fragment {
         });
     }
 
-    private void initializeProgressBar(View view){
-        mProgressBar = view.findViewById(R.id.google_progress);
-        mProgressBar.setIndeterminateDrawable(new FoldingCirclesDrawable.Builder(context)
-                .build());
-    }
-
-    private void initializeYearSpinner(View view) {
-        ArrayList<String> years = new ArrayList();
-        int thisYear = Calendar.getInstance().get(Calendar.YEAR);
-        for (int i = 2015; i <= thisYear; i++) {
-            years.add(Integer.toString(i));
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
-                android.R.layout.simple_spinner_item, years);
-
-        mSpinnerYear = view.findViewById(R.id.spinner_year);
-        mSpinnerYear.setAdapter(adapter);
-        mSpinnerYear.setSelection(years.size() - 1);
-    }
-
     private void initializeMonthSpinner(View view) {
-        ArrayList<String> month = new ArrayList();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item, Constant.months);
@@ -184,69 +161,6 @@ public class UsageFragment extends Fragment {
                 //nothing to do.
             }
         });
-    }
-
-    private void initializeFirebaseFirestore() {
-
-        dataBase = FirebaseFirestore.getInstance();
-    }
-
-    private void retrieveFireStoreData(final String path){
-
-        Log.e(TAG,"index : " + index);
-
-        mProgressBar.bringToFront();
-        mProgressBar.setVisibility(View.VISIBLE);
-
-        DocumentReference documentReference = dataBase
-                .collection(path)
-                .document(Constant.months[index]);
-
-        documentReference.get().addOnCompleteListener(
-                new OnCompleteListener<DocumentSnapshot>() {
-
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot doc = task.getResult();
-                            if (doc.exists()) {
-                                Map<String, Object> map = doc.getData();
-                                reading.add(map);
-                            }else {
-                                reading.add(null);
-                            }
-                        }
-                        index++;
-
-                        if(index < 12){
-                            retrieveFireStoreData(path);
-                        }else{
-                            index = 0;
-                            loadData();
-                            mProgressBar.setVisibility(View.INVISIBLE);
-                            Log.e(TAG,reading.toString());
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-    }
-
-    private String getPath() {
-
-        String year = (mSpinnerYear != null && mSpinnerYear.getSelectedItem().toString() != null)
-                ? mSpinnerYear.getSelectedItem().toString() : "2018";
-
-        String path = "meterDetails/" +
-                Pref.getValue(context, Constant.KEY_METER_ID, "",
-                        Constant.PREF_NAME) + "/" + year;
-
-        Log.d(TAG, "path : " + path);
-
-        return path;
     }
 
     @Override

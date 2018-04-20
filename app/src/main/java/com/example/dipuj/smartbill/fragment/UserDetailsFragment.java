@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.dipuj.smartbill.R;
+import com.example.dipuj.smartbill.activity.UserActivity;
 import com.example.dipuj.smartbill.modal.User;
 import com.example.dipuj.smartbill.utility.Constant;
 import com.example.dipuj.smartbill.utility.Pref;
@@ -44,8 +45,6 @@ public class UserDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        initializeFirebaseFirestore();
     }
 
     @Override
@@ -55,7 +54,8 @@ public class UserDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_details, container, false);
         initializeView(view);
-        this.retrieveFireBaseData();
+        user = ((UserActivity) getActivity()).getUser();
+        updateView();
         return view;
     }
 
@@ -67,42 +67,7 @@ public class UserDetailsFragment extends Fragment {
         mTextViewMeterId = view.findViewById(R.id.txt_meter_id);
     }
 
-    private void initializeFirebaseFirestore() {
-
-        dataBase = FirebaseFirestore.getInstance();
-        user = new User();
-        user.setUserId(Pref.getValue(context,Constant.KEY_USER_ID,"",Constant.PREF_NAME));
-    }
-
-    private void retrieveFireBaseData() {
-        DocumentReference documentReference = dataBase.collection("users").document(user.getUserId());
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    user.setName(doc.getString(Constant.KEY_NAME));
-                    user.setAddress(doc.getString(Constant.KEY_ADDRESS));
-                    user.setMobileNo(doc.getString(Constant.KEY_MOBILE_NO));
-                    user.setEmail(doc.getString(Constant.KEY_EMAIL));
-                    user.setMeterId(doc.getString(Constant.KEY_METER_ID));
-                    Pref.setValue(context, Constant.KEY_METER_ID,user.getMeterId(),Constant.PREF_NAME);
-                    Log.d(TAG, "Fetched Data : " + user.toString());
-
-                    updateView(user);
-                }
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
-                    }
-                });
-    }
-
-    private void updateView(User user){
+    private void updateView(){
         mTextViewName.setText(user.getName());
         mTextViewMeterId.setText(user.getMeterId());
         mTextViewEmail.setText(user.getEmail());

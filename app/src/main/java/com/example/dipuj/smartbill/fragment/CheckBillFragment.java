@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 
 import com.example.dipuj.smartbill.R;
 
-public class AlertFragment extends Fragment {
+public class CheckBillFragment extends Fragment {
 
-    public AlertFragment() {
+    public CheckBillFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class AlertFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_alert, container, false);
+        View view = inflater.inflate(R.layout.fragment_check_bill, container, false);
 
         return view;
     }
