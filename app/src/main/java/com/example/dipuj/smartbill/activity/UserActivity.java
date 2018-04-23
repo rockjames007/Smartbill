@@ -60,9 +60,6 @@ public class UserActivity extends AppCompatActivity
     private FirebaseFirestore dataBase;
 
     private ArrayList<Map<String, Object>> reading = new ArrayList<>();
-    private ArrayList<String> headerList;
-
-    private HashMap<String, ArrayList<Reading>> childList;
 
     int index = 0;
 
@@ -250,7 +247,6 @@ public class UserActivity extends AppCompatActivity
                             retrieveFireStoreMeterData(path);
                         } else {
                             index = 0;
-                            loadData();
                             mCardViewProgress.setVisibility(View.INVISIBLE);
                             initializeUserDetailFragment();
                             Log.e(TAG, reading.toString());
@@ -276,34 +272,6 @@ public class UserActivity extends AppCompatActivity
         Log.d(TAG, "path : " + path);
 
         return path;
-    }
-
-    private void loadData() {
-
-        for (int i = 0; i < reading.size(); i++) {
-            if (index == i) {
-                Log.e(TAG, "Index taken : " + index);
-                Map<String, Object> map;
-                map = reading.get(i);
-                headerList = new ArrayList<>(map.keySet());
-                childList = new HashMap<>();
-                Object[] arr = map.values().toArray();
-                ArrayList<Object> readingObList;
-                for (int j = 0; j < headerList.size(); j++) {
-                    readingObList = (ArrayList<Object>) arr[j];
-                    ArrayList<Reading> readingList = new ArrayList<>();
-                    for (Object ob : readingObList) {
-                        Reading reading = new Reading();
-                        HashMap<String, Object> hashMap = (HashMap<String, Object>) ob;
-                        reading.setReading((Long) hashMap.get(Constant.KEY_READING));
-                        reading.setTimestamp((Date) hashMap.get(Constant.KEY_TIME_STUMP));
-                        Log.e(TAG, "date : " + reading.getTimestamp().toString());
-                        readingList.add(reading);
-                    }
-                    childList.put(headerList.get(j), readingList);
-                }
-            }
-        }
     }
 
     private void retrieveFireBaseUserData() {
@@ -337,14 +305,6 @@ public class UserActivity extends AppCompatActivity
 
     public User getUser(){
         return user;
-    }
-
-    public ArrayList<String> getHeaderList() {
-        return headerList;
-    }
-
-    public HashMap<String, ArrayList<Reading>> getChildList() {
-        return childList;
     }
 
     public ArrayList<Map<String, Object>> getReading() {

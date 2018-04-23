@@ -22,8 +22,16 @@
     <string name="lbl_address">Address</string>
     <string name="lbl_meter_id">Meter Id</string>
 
-    <string name="lbl_last_bill_reading">Last bill reading</string>
-    <string name="lbl_current_reading">Current reading</string>
+    <string name="lbl_bill_amount">Bill Amount</string>
+    <string name="lbl_unit_consumed">Unit Consumed</string>
+    <string name="lbl_previous_reading">Previous Reading</string>
+    <string name="lbl_bill_due_date">Bill Due Date</string>
+
+    <string name="txt_bill_reading_details">Bill Reading Details</string>
+    <string name="txt_bill_amount_details">Bill Amount Details</string>
+
+    <string name="lbl_last_bill_reading">Last Bill Reading</string>
+    <string name="lbl_current_reading">Current Reading</string>
     <string name="lbl_consumption">Consumption</string>
 
     <string name="lbl_fetching_details">Fetching details…</string>

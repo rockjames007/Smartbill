@@ -34,9 +34,11 @@ import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class UsageFragment extends Fragment {
 
@@ -73,9 +75,6 @@ public class UsageFragment extends Fragment {
         initializeFloatingActionButton(view);
         initializeMonthSpinner(view);
         initializeExpandableListView(view);
-
-        headerList = ((UserActivity) getActivity()).getHeaderList();
-        childList = ((UserActivity) getActivity()).getChildList();
         reading = ((UserActivity) getActivity()).getReading();
 
         loadData();
@@ -95,9 +94,10 @@ public class UsageFragment extends Fragment {
                 Log.e(TAG, "Index taken : " + index);
                 Map<String, Object> map;
                 map = reading.get(i);
-                headerList = new ArrayList<>(map.keySet());
+                Map<String, Object> treeMap = new TreeMap<>(map);
+                headerList = new ArrayList<>(treeMap.keySet());
                 childList = new HashMap<>();
-                Object[] arr = map.values().toArray();
+                Object[] arr = treeMap.values().toArray();
                 ArrayList<Object> readingObList;
                 for (int j = 0; j < headerList.size(); j++) {
                     readingObList = (ArrayList<Object>) arr[j];

@@ -1,13 +1,210 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.dipuj.smartbill.fragment.CheckBillFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_spinner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <Spinner
+                android:id="@+id/spinner_month"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_reading_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/card_spinner">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_bill_reading_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="@string/txt_bill_reading_details"
+                android:padding="5dp"/>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_below="@+id/txt_bill_reading_details">
+
+                <TextView
+                    android:id="@+id/lbl_name"
+                    style="@style/LabelTextHomeFragment"
+                    android:text="@string/lbl_name" />
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    style="@style/MeterDetailValueViewHomeFragment"
+                    android:text="Name" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_meter_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_below="@+id/linear_layout_name">
+
+                <TextView
+                    android:id="@+id/lbl_meter_id"
+                    style="@style/LabelTextHomeFragment"
+                    android:text="@string/lbl_meter_id" />
+
+                <TextView
+                    android:id="@+id/txt_meter_id"
+                    style="@style/MeterDetailValueViewHomeFragment"
+                    android:text="Meter id" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_previous_reading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_below="@+id/linear_layout_meter_id">
+
+                <TextView
+                    android:id="@+id/lbl_previous_reading"
+                    style="@style/LabelTextHomeFragment"
+                    android:text="@string/lbl_previous_reading" />
+
+                <TextView
+                    android:id="@+id/txt_previous_reading"
+                    style="@style/MeterDetailValueViewHomeFragment"
+                    android:text="Previous reading" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_current_reading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_below="@+id/linear_layout_previous_reading">
+
+                <TextView
+                    android:id="@+id/lbl_current_reading"
+                    style="@style/LabelTextHomeFragment"
+                    android:text="@string/lbl_current_reading" />
+
+                <TextView
+                    android:id="@+id/txt_current_reading"
+                    style="@style/MeterDetailValueViewHomeFragment"
+                    android:text="Current reading" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_unit_consumed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_below="@+id/linear_layout_current_reading">
+
+                <TextView
+                    android:id="@+id/lbl_unit_consumed"
+                    style="@style/LabelTextHomeFragment"
+                    android:text="@string/lbl_unit_consumed" />
+
+                <TextView
+                    android:id="@+id/txt_unit_consumed"
+                    style="@style/MeterDetailValueViewHomeFragment"
+                    android:text="Unit consumed" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_bill_amount_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/card_reading_detail">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txt_bill_amount_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="@string/txt_bill_amount_details"
+                android:padding="5dp"/>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_bill_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_below="@+id/txt_bill_amount_details">
+
+                <TextView
+                    android:id="@+id/lbl_bill_amount"
+                    style="@style/LabelTextHomeFragment"
+                    android:text="@string/lbl_bill_amount" />
+
+                <TextView
+                    android:id="@+id/txt_bill_amount"
+                    style="@style/MeterDetailValueViewHomeFragment"
+                    android:text="Bill amount" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_bill_due_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_below="@+id/linear_layout_bill_amount">
+
+                <TextView
+                    android:id="@+id/lbl_bill_due_date"
+                    style="@style/LabelTextHomeFragment"
+                    android:text="@string/lbl_bill_due_date" />
+
+                <TextView
+                    android:id="@+id/txt_bill_due_date"
+                    style="@style/MeterDetailValueViewHomeFragment"
+                    android:text="Bill due date" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
