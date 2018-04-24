@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.example.dipuj.smartbill.R;
 import com.example.dipuj.smartbill.fragment.CheckBillFragment;
+import com.example.dipuj.smartbill.fragment.HelpFragment;
 import com.example.dipuj.smartbill.fragment.LimitFragment;
 import com.example.dipuj.smartbill.fragment.UsageFragment;
 import com.example.dipuj.smartbill.fragment.UserDetailsFragment;
@@ -165,7 +166,7 @@ public class UserActivity extends AppCompatActivity
         } else if (id == R.id.nav_alert) {
             fragmentClass = CheckBillFragment.class;
         } else if (id == R.id.nav_help) {
-            fragmentClass = UsageFragment.class;
+            fragmentClass = HelpFragment.class;
         } else if (id == R.id.nav_aboutus) {
             fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_logout) {
