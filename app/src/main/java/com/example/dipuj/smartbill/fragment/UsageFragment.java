@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
@@ -46,6 +47,7 @@ public class UsageFragment extends Fragment {
 
     private Spinner mSpinnerMonth;
     private FloatingActionButton mFloatingActionButton;
+    private ImageView mImageViewNoData;
 
     private ExpandableListView mExpandableListViewReading;
     private ReadingExpandableListAdapter mReadingExpandableListAdapter;
@@ -72,6 +74,7 @@ public class UsageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_usage, container, false);
+        mImageViewNoData = view.findViewById(R.id.img_no_data);
         initializeFloatingActionButton(view);
         initializeMonthSpinner(view);
         initializeExpandableListView(view);
@@ -94,33 +97,43 @@ public class UsageFragment extends Fragment {
                 Log.e(TAG, "Index taken : " + index);
                 Map<String, Object> map;
                 map = reading.get(i);
-                Map<String, Object> treeMap = new TreeMap<>(map);
-                headerList = new ArrayList<>(treeMap.keySet());
-                childList = new HashMap<>();
-                Object[] arr = treeMap.values().toArray();
-                ArrayList<Object> readingObList;
-                for (int j = 0; j < headerList.size(); j++) {
-                    readingObList = (ArrayList<Object>) arr[j];
-                    ArrayList<Reading> readingList = new ArrayList<>();
-                    for (Object ob : readingObList) {
-                        Reading reading = new Reading();
-                        HashMap<String, Object> hashMap = (HashMap<String, Object>) ob;
-                        reading.setReading((Long) hashMap.get(Constant.KEY_READING));
-                        reading.setTimestamp((Date) hashMap.get(Constant.KEY_TIME_STUMP));
-                        Log.e(TAG, "date : " + reading.getTimestamp().toString());
-                        readingList.add(reading);
+                if (map != null) {
+                    Map<String, Object> treeMap = new TreeMap<>(map);
+                    headerList = new ArrayList<>(treeMap.keySet());
+                    childList = new HashMap<>();
+                    Object[] arr = treeMap.values().toArray();
+                    ArrayList<Object> readingObList;
+                    for (int j = 0; j < headerList.size(); j++) {
+                        readingObList = (ArrayList<Object>) arr[j];
+                        ArrayList<Reading> readingList = new ArrayList<>();
+                        for (Object ob : readingObList) {
+                            Reading reading = new Reading();
+                            HashMap<String, Object> hashMap = (HashMap<String, Object>) ob;
+                            reading.setReading((Long) hashMap.get(Constant.KEY_READING));
+                            reading.setTimestamp((Date) hashMap.get(Constant.KEY_TIME_STUMP));
+                            Log.e(TAG, "date : " + reading.getTimestamp().toString());
+                            readingList.add(reading);
+                        }
+                        childList.put(headerList.get(j), readingList);
                     }
-                    childList.put(headerList.get(j), readingList);
+                }else {
+                    headerList.clear();
+                    childList.clear();
+                    mImageViewNoData.setVisibility(View.VISIBLE);
                 }
             }
         }
 
-        mReadingExpandableListAdapter = new ReadingExpandableListAdapter(
-                context,headerList,childList);
+        if(headerList.size() > 0){
+            mImageViewNoData.setVisibility(View.INVISIBLE);
+            mReadingExpandableListAdapter = new ReadingExpandableListAdapter(
+                    context,headerList,childList);
 
-        mExpandableListViewReading.setAdapter(mReadingExpandableListAdapter);
-        mReadingExpandableListAdapter.notifyDataSetChanged();
-
+            mExpandableListViewReading.setAdapter(mReadingExpandableListAdapter);
+            mReadingExpandableListAdapter.notifyDataSetChanged();
+        }else{
+            mImageViewNoData.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initializeFloatingActionButton(View view){
