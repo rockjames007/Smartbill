@@ -22,12 +22,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.dipuj.smartbill.R;
+import com.example.dipuj.smartbill.fragment.AboutusFragment;
 import com.example.dipuj.smartbill.fragment.CheckBillFragment;
+import com.example.dipuj.smartbill.fragment.GraphFragment;
 import com.example.dipuj.smartbill.fragment.HelpFragment;
-import com.example.dipuj.smartbill.fragment.LimitFragment;
 import com.example.dipuj.smartbill.fragment.UsageFragment;
 import com.example.dipuj.smartbill.fragment.UserDetailsFragment;
-import com.example.dipuj.smartbill.modal.Reading;
 import com.example.dipuj.smartbill.modal.User;
 import com.example.dipuj.smartbill.utility.Constant;
 import com.example.dipuj.smartbill.utility.Pref;
@@ -161,18 +161,17 @@ public class UserActivity extends AppCompatActivity
             fragmentClass = UserDetailsFragment.class;
         } else if (id == R.id.nav_usage) {
             fragmentClass = UsageFragment.class;
-        } else if (id == R.id.nav_limit) {
-            fragmentClass = LimitFragment.class;
-        } else if (id == R.id.nav_alert) {
+        } else if (id == R.id.nav_user_details) {
+            fragmentClass = GraphFragment.class;
+        } else if (id == R.id.nav_bill) {
             fragmentClass = CheckBillFragment.class;
         } else if (id == R.id.nav_help) {
             fragmentClass = HelpFragment.class;
         } else if (id == R.id.nav_aboutus) {
-            fragmentClass = UsageFragment.class;
+            fragmentClass = AboutusFragment.class;
         } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, LoginActivity.class);
-            // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
 

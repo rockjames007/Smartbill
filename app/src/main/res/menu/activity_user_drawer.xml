@@ -7,35 +7,35 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_home"
-            android:title="Home" />
+            android:title="@string/txt_menu_home" />
         <item
             android:id="@+id/nav_usage"
             android:icon="@drawable/ic_menu_usage"
-            android:title="Usage" />
+            android:title="@string/txt_menu_usage" />
         <item
-            android:id="@+id/nav_limit"
-            android:icon="@drawable/ic_menu_limit"
-            android:title="Limit " />
+            android:id="@+id/nav_user_details"
+            android:icon="@drawable/ic_menu_user_details"
+            android:title="@string/txt_menu_user_details" />
         <item
-            android:id="@+id/nav_alert"
-            android:icon="@drawable/ic_menu_alert"
-            android:title="Bill" />
+            android:id="@+id/nav_bill"
+            android:icon="@drawable/ic_menu_bill"
+            android:title="@string/txt_menu_bill" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/txt_menu_communicate">
         <menu>
             <item
                 android:id="@+id/nav_help"
-                android:icon="@android:drawable/ic_menu_help"
-                android:title="Help" />
+                android:icon="@drawable/ic_menu_help"
+                android:title="@string/txt_menu_help" />
             <item
                 android:id="@+id/nav_aboutus"
                 android:icon="@drawable/ic_menu_aboutus"
-                android:title="About us" />
+                android:title="@string/txt_menu_aboutus" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_menu_logout"
-                android:title="Logout" />
+                android:title="@string/txt_menu_logout" />
         </menu>
     </item>
 

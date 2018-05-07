@@ -1,13 +1,59 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dipuj.smartbill.fragment.GraphFragment">
+    android:padding="10dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.example.dipuj.smartbill.view.VerticalTextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/txt_chart_yaxis"
+        android:gravity="bottom|center"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/bar_chart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_toRightOf="@+id/txt_chart_yaxis"
+        android:layout_above="@+id/relative_layout_label"
+        android:layout_toEndOf="@+id/txt_chart_yaxis"
+        android:padding="20dp"/>
 
-</FrameLayout>
+    <RelativeLayout
+        android:id="@+id/relative_layout_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/txt_chart_yaxis"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/txt_chart_yaxis"
+        android:layout_marginStart="10dp">
+
+        <ImageView
+            android:id="@+id/image_color_indicator"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@color/colorAccent"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_chart_label1"
+            android:text="@string/txt_date"
+            android:layout_toRightOf="@+id/image_color_indicator"
+            android:layout_toEndOf="@+id/image_color_indicator"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/colorBlack"
+            android:layout_marginStart="20dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

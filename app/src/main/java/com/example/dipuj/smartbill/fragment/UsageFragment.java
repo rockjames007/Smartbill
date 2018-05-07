@@ -18,6 +18,7 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.dipuj.smartbill.R;
 import com.example.dipuj.smartbill.activity.UserActivity;
@@ -86,11 +87,11 @@ public class UsageFragment extends Fragment {
         return view;
     }
 
-    private void initializeExpandableListView(View view){
+    private void initializeExpandableListView(View view) {
         mExpandableListViewReading = view.findViewById(R.id.expandable_reading);
     }
 
-    private void loadData(){
+    private void loadData() {
 
         for (int i = 0; i < reading.size(); i++) {
             if (index == i) {
@@ -107,16 +108,18 @@ public class UsageFragment extends Fragment {
                         readingObList = (ArrayList<Object>) arr[j];
                         ArrayList<Reading> readingList = new ArrayList<>();
                         for (Object ob : readingObList) {
-                            Reading reading = new Reading();
-                            HashMap<String, Object> hashMap = (HashMap<String, Object>) ob;
-                            reading.setReading((Long) hashMap.get(Constant.KEY_READING));
-                            reading.setTimestamp((Date) hashMap.get(Constant.KEY_TIME_STUMP));
-                            Log.e(TAG, "date : " + reading.getTimestamp().toString());
-                            readingList.add(reading);
+                            if(ob != null){
+                                Reading reading = new Reading();
+                                HashMap<String, Object> hashMap = (HashMap<String, Object>) ob;
+                                reading.setReading((Long) hashMap.get(Constant.KEY_READING));
+                                reading.setTimestamp((Date) hashMap.get(Constant.KEY_TIME_STUMP));
+                                Log.e(TAG, "date : " + reading.getTimestamp().toString());
+                                readingList.add(reading);
+                            }
                         }
                         childList.put(headerList.get(j), readingList);
                     }
-                }else {
+                } else {
                     headerList.clear();
                     childList.clear();
                     mImageViewNoData.setVisibility(View.VISIBLE);
@@ -124,25 +127,34 @@ public class UsageFragment extends Fragment {
             }
         }
 
-        if(headerList.size() > 0){
+        if (headerList.size() > 0) {
             mImageViewNoData.setVisibility(View.INVISIBLE);
             mReadingExpandableListAdapter = new ReadingExpandableListAdapter(
-                    context,headerList,childList);
+                    context, headerList, childList);
 
             mExpandableListViewReading.setAdapter(mReadingExpandableListAdapter);
             mReadingExpandableListAdapter.notifyDataSetChanged();
-        }else{
+        } else {
             mImageViewNoData.setVisibility(View.VISIBLE);
         }
     }
 
-    private void initializeFloatingActionButton(View view){
+    private void initializeFloatingActionButton(View view) {
         mFloatingActionButton = view.findViewById(R.id.fab_chart);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.flContent, new GraphFragment()).commit();
+                if (childList.size() > 0) {
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    GraphFragment mGraphFragment = new GraphFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("childList", childList);
+                    bundle.putSerializable("headerList", headerList);
+                    mGraphFragment.setArguments(bundle);
+                    fragmentManager.beginTransaction().replace(R.id.flContent, mGraphFragment).commit();
+                } else {
+                    Toast.makeText(context, "No data available", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -156,21 +168,16 @@ public class UsageFragment extends Fragment {
         mSpinnerMonth.setAdapter(adapter);
         mSpinnerMonth.setSelection(0);
 
-        mSpinnerMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
+        mSpinnerMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                if(position != 0)
-                {
-                    index = position;
-                    loadData();
-                }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("selected",position+"");
+                index = position;
+                loadData();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> arg0)
-            {
+            public void onNothingSelected(AdapterView<?> arg0) {
                 //nothing to do.
             }
         });
