@@ -91,6 +91,7 @@ public class HomeFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.flContent, mFragment);
+        fragmentTransaction.addToBackStack("");
         fragmentTransaction.commit();
     }
 

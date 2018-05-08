@@ -9,7 +9,7 @@
 
     <color name="colorBackground">#FEFEFE</color>
 
-    <color name="colorHomeIconBackground">#B2EBF2</color>
+    <color name="colorHomeIconBackground">#FFF59D</color>
     <color name="colorHomeIconText">#585858</color>
 
 </resources>
