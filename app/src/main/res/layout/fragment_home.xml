@@ -1,8 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:id="@+id/ll_images_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/relative_layout_usage"
+                    style="@style/CustomStyleRelativeLayoutHomeFragment">
+
+                    <ImageView
+                        android:id="@+id/image_usage"
+                        style="@style/CustomStyleImageViewHomeFragmentNew"
+                        android:src="@drawable/ic_menu_usage" />
+
+                    <TextView
+                        style="@style/CustomStyleTextViewHomeFragmentNew"
+                        android:layout_below="@id/image_usage"
+                        android:text="@string/txt_menu_usage" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_layout_user_detail"
+                    style="@style/CustomStyleRelativeLayoutHomeFragment">
+
+                    <ImageView
+                        android:id="@+id/image_user_detail"
+                        style="@style/CustomStyleImageViewHomeFragmentNew"
+                        android:src="@drawable/ic_menu_user_details" />
+
+                    <TextView
+                        style="@style/CustomStyleTextViewHomeFragmentNew"
+                        android:layout_below="@id/image_user_detail"
+                        android:text="@string/txt_menu_user_details" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_images_home"
+                android:gravity="center_horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/relative_layout_bill"
+                    style="@style/CustomStyleRelativeLayoutHomeFragment">
+
+                    <ImageView
+                        android:id="@+id/image_bill"
+                        style="@style/CustomStyleImageViewHomeFragmentNew"
+                        android:src="@drawable/ic_menu_bill" />
+
+                    <TextView
+                        style="@style/CustomStyleTextViewHomeFragmentNew"
+                        android:layout_below="@id/image_bill"
+                        android:text="@string/txt_menu_bill" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_layout_help"
+                    style="@style/CustomStyleRelativeLayoutHomeFragment">
+
+                    <ImageView
+                        android:id="@+id/image_help"
+                        style="@style/CustomStyleImageViewHomeFragmentNew"
+                        android:src="@drawable/ic_menu_help" />
+
+                    <TextView
+                        style="@style/CustomStyleTextViewHomeFragmentNew"
+                        android:layout_below="@id/image_help"
+                        android:text="@string/txt_menu_help" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

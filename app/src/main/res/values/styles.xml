@@ -42,6 +42,30 @@
         <item name="android:padding">5dp</item>
     </style>
 
+    <style name="CustomStyleRelativeLayoutHomeFragment">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+    </style>
 
+    <style name="CustomStyleImageViewHomeFragmentNew">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">150dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:background">@drawable/home_icon_background_new</item>
+        <item name="android:padding">32dp</item>
+        <item name="android:layout_marginBottom">25dp</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+    <style name="CustomStyleTextViewHomeFragmentNew" parent="@android:style/Widget.TextView">
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textColor">@color/colorHomeIconText</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">false</item>
+    </style>
 
 </resources>

@@ -26,6 +26,7 @@ import com.example.dipuj.smartbill.fragment.AboutusFragment;
 import com.example.dipuj.smartbill.fragment.CheckBillFragment;
 import com.example.dipuj.smartbill.fragment.GraphFragment;
 import com.example.dipuj.smartbill.fragment.HelpFragment;
+import com.example.dipuj.smartbill.fragment.HomeFragment;
 import com.example.dipuj.smartbill.fragment.UsageFragment;
 import com.example.dipuj.smartbill.fragment.UserDetailsFragment;
 import com.example.dipuj.smartbill.modal.User;
@@ -99,14 +100,14 @@ public class UserActivity extends AppCompatActivity
         mTextViewEmail = headerView.findViewById(R.id.text_user_email);
     }
 
-    private void initializeUserDetailFragment() {
+    private void initializeHomeFragment() {
 
             mTextViewName.setText(user.getName());
             mTextViewEmail.setText(user.getEmail());
 
             Fragment fragment = null;
             Class fragmentClass = null;
-            fragmentClass = UserDetailsFragment.class;
+            fragmentClass = HomeFragment.class;
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
             } catch (Exception e) {
@@ -158,11 +159,11 @@ public class UserActivity extends AppCompatActivity
         Class fragmentClass = null;
 
         if (id == R.id.nav_home) {
-            fragmentClass = UserDetailsFragment.class;
+            fragmentClass = HomeFragment.class;
         } else if (id == R.id.nav_usage) {
             fragmentClass = UsageFragment.class;
         } else if (id == R.id.nav_user_details) {
-            fragmentClass = GraphFragment.class;
+            fragmentClass = UserDetailsFragment.class;
         } else if (id == R.id.nav_bill) {
             fragmentClass = CheckBillFragment.class;
         } else if (id == R.id.nav_help) {
@@ -248,7 +249,7 @@ public class UserActivity extends AppCompatActivity
                         } else {
                             index = 0;
                             mCardViewProgress.setVisibility(View.INVISIBLE);
-                            initializeUserDetailFragment();
+                            initializeHomeFragment();
                             Log.e(TAG, reading.toString());
                         }
                     }
